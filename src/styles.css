@@ -1,3 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+:root {
+  font-size: 10px;
+}
+
 body {
-  background-color: rebeccapurple;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background-image: linear-gradient(royalblue, mediumblue, darkblue);
+}
+
+main {
+  background-color: linen;
+  font-family:'Courier New', Courier, monospace;
+  margin-left: clamp(200px, 20%, 300px);
+  margin-right: clamp(200px, 20%, 300px);
+  display: grid;
+  height: 100%;
+  grid-template-areas:
+      "buft buft buft"
+      "sd1 comp sd2"
+      "mid1 midP mid2"
+      "sd3 hum sd4"
+      "bufb bufb bufb";
+  grid-template-columns: 1fr 480px 1fr;
+  grid-template-rows: 40px auto auto auto  40px;
+}
+
+.computer-board,
+.player-board {
+  aspect-ratio: 1 / 1;
+  background-color: midnightblue;
+  outline: 6px inset black;
+  
+}
+
+.computer-board {
+  grid-area: comp;
+  align-self: self-end;
+}
+
+.player-board {
+  grid-area: hum;
+}
+
+.buffer-top {
+  grid-area: buft;
+}
+
+.sidetl {
+  grid-area: sd1;
+}
+
+.sidetr {
+  grid-area: sd2;
+}
+
+.mid1 {
+  grid-area: mid1;
+}
+
+.midP {
+  grid-area: midP;
+  font-size: 1.6rem;
+  display: grid;
+  grid-template-areas:
+      "btn theirs msg"
+      "btn yours msg";
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 2fr 3fr;
+  align-items:center;
+  padding: 8px;
+}
+
+.btn-restart {
+  grid-area: btn;
+}
+
+.p-theirs {
+  grid-area: theirs;
+  justify-self: right;
+  padding: 5px;
+}
+
+.p-yours {
+  grid-area: yours;
+  justify-self: right;
+  padding: 5px;
+}
+
+.d-msg {
+  grid-area: msg;
+  height: 100%;
+}
+
+p .msg {
+  height: 100%;
+  align-self: center;
+}
+
+.mid2 {
+  grid-area: mid2;
+}
+
+.sidebl {
+  grid-area: sd3;
+}
+
+.sidebr {
+  grid-area: sd4;
+}
+
+.buffer-bottom {
+  grid-area: bufb;
+}
+
+header,
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 2.4rem;
 }
