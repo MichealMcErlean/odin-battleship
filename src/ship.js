@@ -25,6 +25,7 @@ export class GameBoard {
     this.size = size;
     this.board = this.#buildBoard(this.size);
     this.ships = [];
+    this.shots = new Set();
   }
 
   #buildBoard(size) {
@@ -57,16 +58,63 @@ export class GameBoard {
     return (a[0] == b[0] && a[1] == b[1])
   }
 
+  validShot(xy) {
+    this.shots.has(JSON.stringify(xy)) ? false : true;
+  }
+
   receiveAttack(xy) {
-    let isHit = false;
+    let x = xy[0];
+    let y = xy[1];
+    let hitShip = null;
     this.ships.forEach(ship => {
       ship.loc.forEach(ab => {
         if (this.#matchCoords(xy, ab)) {
-          
+          ship.hit();
+          hitShip = ship;
+          this.board[x][y] = 2;
+          if (ship.isSunk()) {
+            this.ships = this.ships.filter(ship => ship.isSunk() == false);
+          }
         }
       })
     })
+    this.board[x][y] = 1;
+    this.shots.add(JSON.stringify(xy));
+    if (hitShip !== null) {
+      return hitShip;
+    }
+    return false;
+  }
 
-    return isHit
+  shipsLeft() {
+    return this.ships.length > 0;
+  }
+
+  generateRandomShipPlace(ship) {
+    let randomPlace = [];
+    let whichWay = Math.floor(Math.random() * 2);
+    if (whichWay == 0) {
+      let firstX = Math.floor(Math.random() * (this.size + 1 - ship.length));
+      let firstY = Math.floor(Math.random() * this.size);
+      randomPlace.push([firstX, firstY]);
+      for (let i = firstX + 1; i < firstX + ship.length; i++) {
+        randomPlace.push([i, firstY]);
+      }
+    } else if (whichWay == 1) {
+      let firstX = Math.floor(Math.random() * this.size);
+      let firstY = Math.floor(Math.random() * (this.size + 1 - ship.length));
+      randomPlace.push([firstX, firstY]);
+      for (let i = firstY + 1; i < firstY + ship.length; i++) {
+        randomPlace.push([firstX, i]);
+      }
+    }
+    return randomPlace;
+  }
+}
+
+export class Player {
+  constructor(type) {
+    this.board = new GameBoard();
+    this.type = type == 'human' ? type : 'computer';
   }
 }

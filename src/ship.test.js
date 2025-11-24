@@ -1,4 +1,4 @@
-import {Ship, GameBoard} from './ship.js';
+import {Ship, GameBoard, Player} from './ship.js';
 
 
 let carrier;
@@ -7,6 +7,8 @@ let cruiser;
 let submarine;
 let destroyer;
 let playerBoard;
+let player1;
+let player2;
 
 beforeAll(() => {
     carrier = new Ship(5);
@@ -98,6 +100,41 @@ describe('A GameBoard', () => {
     expect(playerBoard.receiveAttack([8,9])).toEqual(false);
   })
 
+  it('can report whether all its ships are gone', () => {
+    expect(playerBoard.shipsLeft()).toEqual(true);
+  })  
+
+  it('can randomly generate a viable set of co-ordinates to place a Ship', () => {
+    let newDes = new Ship(2, 0, false, [], 'Destroyer');
+    let newCru = new Ship(3, 0, false, [], 'Cruiser');
+    let newBat = new Ship(4, 0, false, [], 'Battleship');
+    let newCar = new Ship(5, 0, false, [], 'Carrier')
+    let newLoc = playerBoard.generateRandomShipPlace(newDes);
+    expect(newLoc).toEqual(expect.arrayOf(expect.arrayOf(expect.any(Number))));
+    expect(newLoc).toHaveLength(2);
+    newLoc = playerBoard.generateRandomShipPlace(newCru);
+    expect(newLoc).toEqual(expect.arrayOf(expect.arrayOf(expect.any(Number))));
+    expect(newLoc).toHaveLength(3);
+    newLoc = playerBoard.generateRandomShipPlace(newBat);
+    expect(newLoc).toEqual(expect.arrayOf(expect.arrayOf(expect.any(Number))));
+    expect(newLoc).toHaveLength(4);
+    newLoc = playerBoard.generateRandomShipPlace(newCar);
+    expect(newLoc).toEqual(expect.arrayOf(expect.arrayOf(expect.any(Number))));
+    expect(newLoc).toHaveLength(5);
+      
     
+  })
+
+});
+
+describe('A Player', () => {
+
+  beforeAll(() => {
+    player1 = new Player();
+  })
+
+  it('has a GameBoard', () => {
+    expect(player1.board.board).toBeDefined();
+  })
 
 });
