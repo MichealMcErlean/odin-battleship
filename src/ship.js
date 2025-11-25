@@ -59,7 +59,7 @@ export class GameBoard {
   }
 
   validShot(xy) {
-    this.shots.has(JSON.stringify(xy)) ? false : true;
+    return this.shots.has(JSON.stringify(xy)) ? false : true;
   }
 
   receiveAttack(xy) {

@@ -29,7 +29,7 @@ main {
       "sd3 hum sd4"
       "bufb bufb bufb";
   grid-template-columns: 1fr 480px 1fr;
-  grid-template-rows: 40px auto auto auto  40px;
+  grid-template-rows: 20px auto auto auto 20px;
 }
 
 .computer-board,
@@ -73,6 +73,20 @@ main {
 .player-board {
   grid-area: hum;
   outline: 6px inset green;
+}
+
+.hum-row-div {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.hum-col-div {
+  aspect-ratio: 1 / 1;
+  color: white;
+  align-self:center;
+  justify-self: center;
+  font-size: 4.8rem;
+  font-weight: 900;
 }
 
 .buffer-top {

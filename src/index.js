@@ -22,12 +22,27 @@ function screenManager() {
     DM.buildComputerBoard(computer);
     DM.placeComputerShips(computer);
     DM.placePlayerShips(human);
-
+    DM.buildPlayerBoard(human);
+    regenButton.disabled = false;
+    DM.printMsg('Hit \'Roll New Positions\' to change your ships, or click on the enemy grid to get started!');
+    DM.attachAttackListeners(computer, human);
   }
 
   resetButton.addEventListener('click', () => {
     startGame();
   })
+
+  regenButton.addEventListener('click', () => {
+    human = new Player('human');
+    computer = new Player('computer');
+    DM.buildComputerBoard(computer);
+    DM.placeComputerShips(computer);
+    DM.placePlayerShips(human);
+    DM.buildPlayerBoard(human);
+    DM.attachAttackListeners(computer);
+  })
+
+  
 }
 
 screenManager();
