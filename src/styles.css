@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid black;
 }
 
 :root {
@@ -37,17 +36,43 @@ main {
 .player-board {
   aspect-ratio: 1 / 1;
   background-color: midnightblue;
-  outline: 6px inset black;
+  
   
 }
 
 .computer-board {
   grid-area: comp;
   align-self: self-end;
+  outline: 6px inset red;
+}
+
+.comp-row-div {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.comp-col-div {
+  aspect-ratio: 1 / 1;
+}
+
+.comp-cell-btn {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-weight: 900;
+  font-size: 4.8rem;
+  color: white;
+  background-color: midnightblue;
+  transition: 0.4s;
+}
+
+.comp-cell-btn:active {
+  background-color: red;
 }
 
 .player-board {
   grid-area: hum;
+  outline: 6px inset green;
 }
 
 .buffer-top {
@@ -71,8 +96,8 @@ main {
   font-size: 1.6rem;
   display: grid;
   grid-template-areas:
-      "btn theirs msg"
-      "btn yours msg";
+      "btns theirs msg"
+      "btnr yours msg";
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 2fr 3fr;
   align-items:center;
@@ -80,29 +105,46 @@ main {
 }
 
 .btn-restart {
-  grid-area: btn;
+  grid-area: btns;
+}
+
+.btn-regen {
+  grid-area: btnr;
 }
 
 .p-theirs {
   grid-area: theirs;
   justify-self: right;
   padding: 5px;
+  font-size: 1.4rem;
 }
 
 .p-yours {
   grid-area: yours;
   justify-self: right;
   padding: 5px;
+  font-size: 1.4rem;
+}
+
+.num-theirs,
+.num-yours {
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
 .d-msg {
+  margin: 10px;
   grid-area: msg;
   height: 100%;
+  background-color: white;
+  border: 3px inset black;
 }
 
-p .msg {
+p.msg {
   height: 100%;
+  justify-self: right;
   align-self: center;
+  padding: 5px;
 }
 
 .mid2 {
